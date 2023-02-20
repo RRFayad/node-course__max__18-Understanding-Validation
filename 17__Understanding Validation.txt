@@ -1,0 +1,42 @@
+277. Module Introduction
+    - Resetting Passwords
+     -Authorization
+
+278. Resetting Passwords
+    * For resetting passwords, we are gonna start working with new views and new routes
+        - New view
+        - New Controller
+        - New Route
+
+279. Implementing the Token Logic
+
+    - We used crypto node library, to generate random token:
+        * Check exports.postReset()
+
+    - We then save it to the User in DB (we had to create this option in the User model)
+
+    - After that, we created a view that should be displayed when the user get to the reset route, with the tokne in params (it was going to be sent via email - but Im having trouble setting up this)
+        * This page will allow us to create a new password
+
+282. Adding Logic to Update the Password
+
+    * No new concepts, also I did it by myself
+     
+283. Why we Need Authorization & 284. Adding Authorization
+
+    - To restrict permissions of an User
+        - We don't want to let an User edit / delete a product created by another User
+
+    - Just added a filter in admin getProducts()
+
+285. Adding Protection to Post Actions
+
+    - Just updated some logic to the check in the post requests if I am loggid in with the right User
+
+287. Wrap Up
+
+    - Password Resetting
+        - Using Reset (random and unguessable) and TOken Expiration Time
+    
+    - Authorizatoin
+        - To control which visitor can edit what
