@@ -1,8 +1,7 @@
 const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
-// const nodemailer = require("nodemailer");
-// const sendgridTransport = require("nodemailer-sendgrid-transport");
 const sgMail = require("@sendgrid/mail");
+const { validationResult } = require("express-validator");
 
 const User = require("../models/user");
 
@@ -81,6 +80,18 @@ exports.postSignup = (req, res, next) => {
   const password = req.body.password;
   const confirmPassword = req.body.confirmPassword;
   // We are not going to work in validation right now, but this should be done (we will work on this in the future)
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    console.log(errors.array());
+    return res
+      .status(422) // 422 is a regular res status for validation errors
+      .render("auth/signup", {
+        path: "/signup",
+        pageTitle: "Signup",
+        errorMessage: errors.array(),
+      });
+  }
 
   User.findOne({ email: email }).then((userDoc) => {
     if (userDoc) {

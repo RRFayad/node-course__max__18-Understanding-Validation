@@ -68,6 +68,7 @@ app.use(authRoutes);
 app.use(errorController.get404);
 
 mongoose
+  .set("strictQuery", true) // I simply use this to strop warning me - I found that it makes mongoose allow saing only fields that exist in my model schema
   .connect(MONGODB_URI)
   .then((result) => {
     app.listen(3000);
