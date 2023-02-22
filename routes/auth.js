@@ -24,9 +24,15 @@ router.post(
         }
         return true;
       }),
-    body("password", "Please, at least 5 characters and alphaumeric")
+    body("password", "Please, at least 6 characters and alphaumeric")
       .isLength({ min: 6 }) // body is just an alternative to the check(), we will chec the body of the request
       .isAlphanumeric(),
+    body("confirmPassword").custom((value, { req }) => {
+      if (value !== req.body.password) {
+        throw new Error("Passwords do not match");
+      }
+      return true;
+    }),
   ],
   authController.postSignup
 );

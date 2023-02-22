@@ -73,4 +73,8 @@
 
 295. More Validators
     * We want to add a new middleware, to validate the password (if it's at least 6 characters long)
+
+296. Checking For Field Equality
+
+    * Created a simple logic to check the password x confirmPassword
     
