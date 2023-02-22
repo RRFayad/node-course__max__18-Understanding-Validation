@@ -100,11 +100,26 @@ ASSIGNMENT:
     - In the login page:
         - Add validation to be sure the email address is an email and the password has the same logic from signup
 
-298. Keeping User Input (UX)
+298. Keeping User Input (UX purposes)
 
     - Thinking a bit more about UX, we want to keep the data in the input field after de user
     
     - It's like a 'technique'
         - We created a OldInput value for the rendering views, that are empty at first and we pass it in the posts methods
             - This let us keep the values for the new requests, and keep qht the user filled before
+
+299. Adding Conditional CSS Classes
+
+    - It's just about using the information and render in a class value in our ejs file
+
+    * I should check the object that comes from the errors to understand better how to manipulate, but
+        It has a param value, which contains the param I defined in the validation function, e.g.:
+              errors: [
+                    {
+                    value: 'qwe',
+                    msg: 'Please Enter a valid e-mail',
+                    param: 'email',
+                    location: 'body'
+                    }
+                ]
     

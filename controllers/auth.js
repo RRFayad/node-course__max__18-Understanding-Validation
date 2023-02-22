@@ -44,6 +44,7 @@ exports.getSignup = (req, res, next) => {
     pageTitle: "Signup",
     errorMessage: message,
     oldInput: { email: "", password: "", confirmPassword: "" },
+    validationErrors: [],
   });
 };
 
@@ -94,6 +95,9 @@ exports.postSignup = (req, res, next) => {
   const confirmPassword = req.body.confirmPassword;
   const errors = validationResult(req);
 
+  console.log(errors);
+  // console.log(errors.array());
+
   if (!errors.isEmpty()) {
     return res
       .status(422) // 422 is a regular res status for validation errors
@@ -102,6 +106,7 @@ exports.postSignup = (req, res, next) => {
         pageTitle: "Signup",
         errorMessage: errors.array()[0].msg,
         oldInput: { email, password, confirmPassword },
+        validationErrors: errors.array(),
       });
   }
 
