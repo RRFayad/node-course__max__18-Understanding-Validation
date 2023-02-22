@@ -13,7 +13,16 @@ router.post("/login", authController.postLogin);
 
 router.post(
   "/signup",
-  check("email").isEmail().withMessage("Please Enter a valid e-mail"),
+  check("email")
+    .isEmail()
+    .withMessage("Please Enter a valid e-mail")
+    .custom((value, { req }) => {
+      // This is a dummy logic, but just to show that we can create our own custom validations
+      if (value === "test@test.com") {
+        throw new Error("This email address is forbidden");
+      }
+      return true;
+    }),
   authController.postSignup
 );
 
