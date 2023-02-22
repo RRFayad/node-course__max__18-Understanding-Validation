@@ -77,4 +77,7 @@
 296. Checking For Field Equality
 
     * Created a simple logic to check the password x confirmPassword
+
+297. Adding Async Validation
+    - Summing up, we can return Promise.reject() to a rejected validation
     

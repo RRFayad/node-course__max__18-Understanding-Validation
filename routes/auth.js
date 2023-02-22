@@ -2,6 +2,7 @@ const express = require("express");
 const { check, body } = require("express-validator");
 
 const authController = require("../controllers/auth");
+const User = require("../models/user");
 
 const router = express.Router();
 
@@ -18,11 +19,15 @@ router.post(
       .isEmail()
       .withMessage("Please Enter a valid e-mail")
       .custom((value, { req }) => {
-        // This is a dummy logic, but just to show that we can create our own custom validations
-        if (value === "test@test.com") {
-          throw new Error("This email address is forbidden");
-        }
-        return true;
+        // if (value === "test@test.com") {         // This is a dummy logic, but just to show that we can create our own custom validations
+        //   throw new Error("This email address is forbidden");
+        // }
+        // return true;
+        return User.findOne({ email: value }).then((userDoc) => {
+          if (userDoc) {
+            return Promise.reject("E-mail already exists!");
+          }
+        });
       }),
     body("password", "Please, at least 6 characters and alphaumeric")
       .isLength({ min: 6 }) // body is just an alternative to the check(), we will chec the body of the request
