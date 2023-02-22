@@ -39,3 +39,11 @@
                     });
                     }
             * Obs.: 422 is a default response status for validation
+
+293. Using Validation Error Messages
+
+    IN the route:
+        router.post("/signup",check("email").isEmail().withMessage("Please Enter a valid e-mail"),authController.postSignup);
+
+    - In the controller:
+            errorMessage: errors.array()[0].msg,
