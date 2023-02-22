@@ -99,4 +99,12 @@
 ASSIGNMENT:
     - In the login page:
         - Add validation to be sure the email address is an email and the password has the same logic from signup
+
+298. Keeping User Input (UX)
+
+    - Thinking a bit more about UX, we want to keep the data in the input field after de user
+    
+    - It's like a 'technique'
+        - We created a OldInput value for the rendering views, that are empty at first and we pass it in the posts methods
+            - This let us keep the values for the new requests, and keep qht the user filled before
     
