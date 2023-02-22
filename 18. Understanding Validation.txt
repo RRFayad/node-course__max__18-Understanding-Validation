@@ -70,4 +70,7 @@
     );
 
         * return true is the return of a posotive valdiation
+
+295. More Validators
+    * We want to add a new middleware, to validate the password (if it's at least 6 characters long)
     
