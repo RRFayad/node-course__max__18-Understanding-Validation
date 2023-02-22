@@ -69,10 +69,25 @@
         authController.postSignup
     );
 
+    - We have to get the error in the controller and work with it:
+          const errors = validationResult(req);
+
+            if (!errors.isEmpty()) {
+                return res.status(422).render("auth/login", {
+                path: "/signup",
+                pageTitle: "Signup",
+                errorMessage: errors.array()[0].msg,
+                });
+            }
+
         * return true is the return of a posotive valdiation
 
 295. More Validators
     * We want to add a new middleware, to validate the password (if it's at least 6 characters long)
+
+    - It's recommended to work with an array of validators
+
+    * It can be one message per validator, or a message for all the checks iun one item
 
 296. Checking For Field Equality
 
@@ -80,4 +95,8 @@
 
 297. Adding Async Validation
     - Summing up, we can return Promise.reject() to a rejected validation
+
+ASSIGNMENT:
+    - In the login page:
+        - Add validation to be sure the email address is an email and the password has the same logic from signup
     
