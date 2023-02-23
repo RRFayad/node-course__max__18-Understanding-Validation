@@ -29,6 +29,7 @@ exports.getLogin = (req, res, next) => {
     pageTitle: "Login",
     errorMessage: message,
     oldInput: { email: "", password: "" },
+    validationErrors: [],
   });
 };
 
@@ -59,14 +60,20 @@ exports.postLogin = (req, res, next) => {
       pageTitle: "Signup",
       errorMessage: errors.array()[0].msg,
       oldInput: { email, password },
+      validationErrors: errors.array(),
     });
   }
 
   User.findOne({ email })
     .then((user) => {
       if (!user) {
-        req.flash("error", "E-mail not found");
-        res.redirect("/login");
+        return res.status(422).render("auth/login", {
+          path: "/login",
+          pageTitle: "Login",
+          errorMessage: "E-mail not found",
+          oldInput: { email, password },
+          validationErrors: [{ param: "email", param: "password" }],
+        });
       }
       bcrypt
         .compare(password, user.password) // return boolean
@@ -75,11 +82,17 @@ exports.postLogin = (req, res, next) => {
             req.session.isLoggedIn = true;
             req.session.user = user;
             return req.session.save((err) => {
-              console.log(err);
+              if (err) console.log(err);
               res.redirect("/");
             });
           }
-          return res.redirect("/login");
+          return res.status(422).render("auth/login", {
+            path: "/login",
+            pageTitle: "Login",
+            errorMessage: "Password does not match!",
+            oldInput: { email, password },
+            validationErrors: [{ param: "email", param: "password" }],
+          });
         })
         .catch((err) => {
           console.log(err);

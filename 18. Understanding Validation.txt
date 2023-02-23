@@ -122,4 +122,7 @@ ASSIGNMENT:
                     location: 'body'
                     }
                 ]
+
+300. Adding Validation to Login
+    * No new concepts, just added the rrors / validation logic to the login controllet and route
     
