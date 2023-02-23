@@ -125,4 +125,11 @@ ASSIGNMENT:
 
 300. Adding Validation to Login
     * No new concepts, just added the rrors / validation logic to the login controllet and route
+
+301. Sanitizing Data
+    - Sanitize data is to process data in a way that makes sense to be done, to as lower casing email, trim etc
+
+    - It's better to sanitize inputs,
+        - We have some methods in the validator library;
+        - We set the sanitizer together with the validators (check auth routes)
     

@@ -13,13 +13,17 @@ router.get("/signup", authController.getSignup);
 router.post(
   "/login",
   [
-    body("email").isEmail().withMessage("Please insert a real e-mail"),
+    body("email")
+      .isEmail()
+      .withMessage("Please insert a real e-mail")
+      .normalizeEmail(),
     body(
       "password",
       "it makes no sense to validate it here, but it's just for the sake of practice"
     )
       .isLength({ min: 6 })
-      .isAlphanumeric(),
+      .isAlphanumeric()
+      .trim(),
   ],
   authController.postLogin
 );
@@ -40,10 +44,12 @@ router.post(
             return Promise.reject("E-mail already exists!");
           }
         });
-      }),
+      })
+      .normalizeEmail(),
     body("password", "Please, at least 6 characters and alphaumeric")
       .isLength({ min: 6 }) // body is just an alternative to the check(), we will chec the body of the request
-      .isAlphanumeric(),
+      .isAlphanumeric()
+      .trim(),
     body("confirmPassword").custom((value, { req }) => {
       if (value !== req.body.password) {
         throw new Error("Passwords do not match");
