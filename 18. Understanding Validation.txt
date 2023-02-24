@@ -56,9 +56,8 @@
 
     - router.post(
         "/signup",
-        check("email")
+        check("email", "Please Enter a valid e-mail")
             .isEmail()
-            .withMessage("Please Enter a valid e-mail")
             .custom((value, { req }) => {
             // This is a dummy logic, but just to show that we can create our own custom validations
             if (value === "test@test.com") {
@@ -70,6 +69,8 @@
     );
 
     - We have to get the error in the controller and work with it:
+        * remember to require the validationResul method
+
           const errors = validationResult(req);
 
             if (!errors.isEmpty()) {
@@ -130,6 +131,8 @@ ASSIGNMENT:
     - Sanitize data is to process data in a way that makes sense to be done, to as lower casing email, trim etc
 
     - It's better to sanitize inputs,
-        - We have some methods in the validator library;
+        - We have some methods in the express-validator library;
         - We set the sanitizer together with the validators (check auth routes)
-    
+
+302. Validating Product Addition
+    - 

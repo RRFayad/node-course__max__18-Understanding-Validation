@@ -1,4 +1,5 @@
 const path = require("path");
+const { body } = require("express-validator");
 
 const express = require("express");
 
@@ -14,11 +15,31 @@ router.get("/add-product", isAuth, adminController.getAddProduct);
 router.get("/products", isAuth, adminController.getProducts);
 
 // /admin/add-product => POST
-router.post("/add-product", isAuth, adminController.postAddProduct);
+router.post(
+  "/add-product",
+  isAuth,
+  [
+    body("title", "Invalid Title").isLength({ min: 3 }).trim(),
+    body("imageUrl", "Invalid URL").isURL().trim(),
+    body("price", "Invalid Price").isNumeric().trim(),
+    body("description").trim(),
+  ],
+  adminController.postAddProduct
+);
 
 router.get("/edit-product/:productId", isAuth, adminController.getEditProduct);
 
-router.post("/edit-product", isAuth, adminController.postEditProduct);
+router.post(
+  "/edit-product",
+  isAuth,
+  [
+    body("title", "Invalid Title").isLength({ min: 3 }).trim(),
+    body("imageUrl", "Invalid URL").isURL().trim(),
+    body("price", "Invalid Price").isNumeric().trim(),
+    body("description").trim(),
+  ],
+  adminController.postEditProduct
+);
 
 router.post("/delete-product", isAuth, adminController.postDeleteProduct);
 
