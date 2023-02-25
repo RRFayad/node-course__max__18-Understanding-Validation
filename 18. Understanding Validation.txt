@@ -134,5 +134,10 @@ ASSIGNMENT:
         - We have some methods in the express-validator library;
         - We set the sanitizer together with the validators (check auth routes)
 
-302. Validating Product Addition
-    - 
+304. Wrap Up
+
+    - Add validator to the routes (as middlewares)
+    - Collect errors in he controllers
+    - Re Render the view depending of the errors
+        - Some error messages
+        - Some COnditional styles
